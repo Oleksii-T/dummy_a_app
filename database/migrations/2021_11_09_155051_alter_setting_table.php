@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AlterSettingTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('settings', function (Blueprint $table) {
+            $table->dropColumn('value');
+        });
+        Schema::table('settings', function (Blueprint $table) {
+            $table->json('value')->nullable()->after('key');
+            $table->boolean('is_file')->default(false)->after('value');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}
